@@ -27,3 +27,16 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 const difficultyLevel = prompt(
   'Dimmi il livello di difficoltà a cui vuoi giocare: 1, 2 o 3'
 );
+
+// range di numeri per la partita, default su massima difficoltà
+let maxRange = 49;
+
+// calcolo di maxRange
+if (difficultyLevel === '1') {
+  maxRange = 100;
+} else if (difficultyLevel === '2') {
+  maxRange = 81;
+}
+
+// variabile che contiene i numeri delle bombe
+let bomba = generateBombs();
