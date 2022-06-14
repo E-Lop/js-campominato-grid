@@ -23,6 +23,9 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 //          se maxTentativi raggiunto ---> gioco finito e alert vittoria
 //          altrimenti gioco continua
 
+// numero di bombe nel gioco
+const quantityOfBombs = 16;
+
 // chiedo all'utente il livello di difficoltà del gioco
 const difficultyLevel = prompt(
   'Dimmi il livello di difficoltà a cui vuoi giocare: 1, 2 o 3'
@@ -38,5 +41,34 @@ if (difficultyLevel === '1') {
   maxRange = 81;
 }
 
-// variabile che contiene i numeri delle bombe
-let bomba = generateBombs();
+// variabile che contiene le bombe
+let bomba = generateBombs(quantityOfBombs, 1, maxRange);
+console.log('bomba', bomba);
+
+// ------------------------
+// FUNZIONI
+// ------------------------
+
+// genera un array di x elementi con numeri casuali tra 1 e maxRange (inclusi)
+// numberOfElements --> quantità elementi da creare
+// minRange --> minimo del numero casuale
+// maxRange --> max del numero casuale
+function generateBombs(quantityOfBombs, minRange, maxRange) {
+  // genero array per numeri casuali
+  const randomNumbersArray = [];
+
+  // genero elementi finchè array.length = numberOfElements
+  while (randomNumbersArray.length < quantityOfBombs) {
+    const randomNumber = getRndInteger(minRange, maxRange);
+    // se il numero non è gia presente nell'array allora lo aggiungo
+    if (!randomNumbersArray.includes(randomNumber)) {
+      randomNumbersArray.push(randomNumber);
+    }
+  }
+  return randomNumbersArray;
+}
+
+// generatore di numeri casuali tra min e max (inclusi)
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
