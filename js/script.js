@@ -57,25 +57,26 @@ let safeNumbers = [];
 
 let gameContinues = true;
 while (gameContinues === true) {
-    const userNumber = parseInt(prompt('Scrivi un numero'));
+  const userNumber = parseInt(prompt('Scrivi un numero'));
 
-    //   se il numero combacia con una bomba
-    if (bomba.includes(userNumber)) {
-      // messaggio di game over
-      alert('Hai perso');
-      // il gioco finisce
+  //   se il numero combacia con una bomba
+  if (bomba.includes(userNumber)) {
+    // messaggio di game over
+    alert('Hai perso');
+    alert('Totale di numeri indovinati: ' + safeNumbers.length);
+    // il gioco finisce
+    gameContinues = false;
+  } else {
+    // inserisco il numero nell'array dei numeri azzeccati, se non lo contiene già
+    if (!safeNumbers.includes(userNumber)) {
+      safeNumbers.push(userNumber);
+    }
+    if (safeNumbers.length === numberOfAttempts) {
+      alert('Hai indovinato tutti i numeri! Hai vinto');
       gameContinues = false;
-    } else {
-      if (!safeNumbers.includes(userNumber)) {
-          safeNumbers.push(userNumber);
-  
     }
-        if (safeNumbers.length === 2) {
-        alert('Hai indovinato tutti i numeri! Hai vinto');
-        gameContinues = false
-    }
+  }
 }
-
 // ------------------------
 // FUNZIONI
 // ------------------------
@@ -101,5 +102,5 @@ function generateBombs(quantityOfBombs, minRange, maxRange) {
 
 // generatore di numeri casuali tra min e max (inclusi)
 function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
