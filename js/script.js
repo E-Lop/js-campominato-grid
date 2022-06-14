@@ -20,7 +20,7 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 // numeroUtente (via input): se === bomba ---> gioco finito e alert sconfitta + punteggio
 // altrimenti:
 //      se non già incluso, inserisco in array numeri azzeccati
-//          se maxTentativi raggiunto ---> gioco finito e alert vittoria
+//      se maxTentativi raggiunto ---> gioco finito e alert vittoria
 //          altrimenti gioco continua
 
 // numero di bombe nel gioco
@@ -48,6 +48,34 @@ console.log('bomba', bomba);
 // numero di tentativi, quindi durata massima partita
 const numberOfAttempts = maxRange - quantityOfBombs;
 
+// array che contiene i numeri indicati dall'utente durante il gioco che non sono bombe
+let safeNumbers = [];
+
+// ------------------------
+// LOGICA DEL GIOCO
+// ------------------------
+
+let gameContinues = true;
+while (gameContinues === true) {
+    const userNumber = parseInt(prompt('Scrivi un numero'));
+
+    //   se il numero combacia con una bomba
+    if (bomba.includes(userNumber)) {
+      // messaggio di game over
+      alert('Hai perso');
+      // il gioco finisce
+      gameContinues = false;
+    } else {
+      if (!safeNumbers.includes(userNumber)) {
+          safeNumbers.push(userNumber);
+  
+    }
+        if (safeNumbers.length === 2) {
+        alert('Hai indovinato tutti i numeri! Hai vinto');
+        gameContinues = false
+    }
+}
+
 // ------------------------
 // FUNZIONI
 // ------------------------
@@ -73,5 +101,5 @@ function generateBombs(quantityOfBombs, minRange, maxRange) {
 
 // generatore di numeri casuali tra min e max (inclusi)
 function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
