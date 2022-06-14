@@ -53,6 +53,10 @@ const numberOfAttempts = maxRange - quantityOfBombs;
 // array che contiene i numeri indicati dall'utente durante il gioco che non sono bombe
 let safeNumbers = [];
 
+// ? perchè funziona anche se gameResult non è mai dichiarato?
+// dichiarazione variabile per esito della partita
+// let gameResult;
+
 // ------------------------
 // LOGICA DEL GIOCO
 // ------------------------
@@ -63,9 +67,8 @@ while (gameContinues === true) {
 
   //   se il numero combacia con una bomba
   if (bomba.includes(userNumber)) {
-    // messaggio di game over
-    alert('Hai perso');
-    alert('Totale di numeri indovinati: ' + safeNumbers.length);
+    // funzione gestione outcome gioco, esito sconfitta
+    gameOutcome('lose', safeNumbers);
     // il gioco finisce
     gameContinues = false;
   } else {
@@ -75,8 +78,8 @@ while (gameContinues === true) {
     }
     // se la quantità di numeri nell'array degli azzeccati è uguale al numero di tentativi
     if (safeNumbers.length === numberOfAttempts) {
-      // messaggio di game over
-      alert('Hai indovinato tutti i numeri! Hai vinto');
+      // funzione gestione outcome gioco, esito vittoria
+      gameOutcome('win', safeNumbers);
       // il gioco finisce
       gameContinues = false;
     }
@@ -85,6 +88,18 @@ while (gameContinues === true) {
 // ------------------------
 // FUNZIONI
 // ------------------------
+
+// gestione dei messaggi di fine partita
+// gameResult sarà 'win' in caso di vittoria
+// secondo attributo per calcolare quantità di numeri giusti indovinati
+function gameOutcome(gameResult, safeNumbers) {
+  if (gameResult === 'win') {
+    alert('Hai indovinato tutti i numeri! Hai vinto');
+  } else {
+    alert('Hai perso');
+    alert('Totale di numeri indovinati: ' + safeNumbers.length);
+  }
+}
 
 // genera un array di x elementi con numeri casuali tra minRange e maxRange (inclusi)
 // quantityOfBombs --> quantità elementi da creare
