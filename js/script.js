@@ -9,6 +9,7 @@ se il numero è presente nella lista dei numeri generati, abbiamo calpestato una
 Altrimenti il gioco va avanti a meno di aver raggiunto il numero massimo di tentativi possibili. In questo caso il gioco finisce con un messaggio di vittoria.
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha scelto un numero che non era una bomba. */
 
+// ---------------------------------------------------------------------------------------
 //  ANALISI
 // FASE PREPARATORIA
 // chiedo livello difficoltà a utente (tramite prompt)
@@ -22,6 +23,7 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 //      se non già incluso, inserisco in array numeri azzeccati
 //      se maxTentativi raggiunto ---> gioco finito e alert vittoria
 //          altrimenti gioco continua
+// ---------------------------------------------------------------------------------------
 
 // numero di bombe nel gioco
 const quantityOfBombs = 16;
@@ -71,8 +73,11 @@ while (gameContinues === true) {
     if (!safeNumbers.includes(userNumber)) {
       safeNumbers.push(userNumber);
     }
+    // se la quantità di numeri nell'array degli azzeccati è uguale al numero di tentativi
     if (safeNumbers.length === numberOfAttempts) {
+      // messaggio di game over
       alert('Hai indovinato tutti i numeri! Hai vinto');
+      // il gioco finisce
       gameContinues = false;
     }
   }
@@ -81,15 +86,15 @@ while (gameContinues === true) {
 // FUNZIONI
 // ------------------------
 
-// genera un array di x elementi con numeri casuali tra 1 e maxRange (inclusi)
-// numberOfElements --> quantità elementi da creare
-// minRange --> minimo del numero casuale
-// maxRange --> max del numero casuale
+// genera un array di x elementi con numeri casuali tra minRange e maxRange (inclusi)
+// quantityOfBombs --> quantità elementi da creare
+// minRange --> valore minimo del numero casuale
+// maxRange --> valore massimo del numero casuale
 function generateBombs(quantityOfBombs, minRange, maxRange) {
   // genero array per numeri casuali
   const randomNumbersArray = [];
 
-  // genero elementi finchè array.length = numberOfElements
+  // genero elementi finchè array.length = quantityOfBombs
   while (randomNumbersArray.length < quantityOfBombs) {
     const randomNumber = getRndInteger(minRange, maxRange);
     // se il numero non è gia presente nell'array allora lo aggiungo
