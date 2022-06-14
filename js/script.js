@@ -45,6 +45,9 @@ if (difficultyLevel === '1') {
 let bomba = generateBombs(quantityOfBombs, 1, maxRange);
 console.log('bomba', bomba);
 
+// numero di tentativi, quindi durata massima partita
+const numberOfAttempts = maxRange - quantityOfBombs;
+
 // ------------------------
 // FUNZIONI
 // ------------------------
